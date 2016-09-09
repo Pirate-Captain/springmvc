@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     
-    <artifactId>springmvc-webapp</artifactId>
+    <artifactId>zyl-springmvc-webapp</artifactId>
     <packaging>war</packaging>
     
     <build>
