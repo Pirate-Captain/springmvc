@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author zhuyl<a href="mailto:zhuyl@chsi.com.cn">zhu Youliang</a>
+ * @author zhuyl<a href="mailto:zhuyouliangcn@gmail.com">zhu Youliang</a>
  * @version $Id$
  */
 @Controller
