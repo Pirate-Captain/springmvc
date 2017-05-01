@@ -11,4 +11,8 @@
     <definition name="tableTemplate" extends="baseLayout">
         <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/tables/tableTemplate.jsp"/>
     </definition>
+
+    <definition name="userlist" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/userList.jsp"/>
+    </definition>
 </tiles-definitions>
