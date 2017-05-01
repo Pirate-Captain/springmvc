@@ -12,7 +12,27 @@
         <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/tables/tableTemplate.jsp"/>
     </definition>
 
-    <definition name="userlist" extends="baseLayout">
+    <definition name="user.list" extends="baseLayout">
         <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/userList.jsp"/>
+    </definition>
+
+    <definition name="user.add" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/add.jsp"/>
+    </definition>
+
+    <definition name="user.show" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/show.jsp"/>
+    </definition>
+
+    <definition name="user.update" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/add.jsp"/>
+    </definition>
+
+    <definition name="user.error" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/error.jsp"/>
+    </definition>
+
+    <definition name="user.upload" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/upload.jsp"/>
     </definition>
 </tiles-definitions>

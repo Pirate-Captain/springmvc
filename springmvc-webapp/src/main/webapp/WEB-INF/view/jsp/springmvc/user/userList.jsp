@@ -1,5 +1,6 @@
 <%@page pageEncoding="utf-8" language="java" contentType="text/html;UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="/WEB-INF/view/jsp/springmvc/common/common.jsp" %>
 <div class="page-content">
     <div class="page-header">
         <h1>
@@ -32,15 +33,15 @@
                                         <td class="center">${userVar.value.age}</td>
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
+                                                <a class="blue" href="<%=springMvcBaseUrl%>/user/${userVar.value.name}">
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
 
-                                                <a class="green" href="#">
+                                                <a class="green" href="<%=springMvcBaseUrl%>/user/${userVar.value.name}/update">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
-                                                <a class="red" href="#">
+                                                <a class="red" href="<%=springMvcBaseUrl%>/user/delete/${userVar.value.name}">
                                                     <i class="icon-trash bigger-130"></i>
                                                 </a>
                                             </div>
@@ -49,6 +50,14 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="center">
+                        <a href="<%=springMvcBaseUrl%>/user/add" class="btn btn-sm btn-primary">
+                            <span class="bigger-110">添加</span>
+                        </a>
+                        <a href="<%=springMvcBaseUrl%>/user/upload" class="btn btn-sm btn-primary">
+                            <span class="bigger-110">添加</span>
+                        </a>
                     </div>
                 </div>
             </div>

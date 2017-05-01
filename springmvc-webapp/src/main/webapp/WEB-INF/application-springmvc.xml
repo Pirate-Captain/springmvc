@@ -21,6 +21,14 @@
         <property name="suffix" value=".jsp" />
     </bean>
     -->
+    <!--全局的Exception管理-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.zyl.exception.UserException">user.error</prop>
+            </props>
+        </property>
+    </bean>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass">
             <value>
