@@ -95,7 +95,9 @@ public class UserInfoController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(MultipartFile multipartFile) {
-        System.out.println(multipartFile.getOriginalFilename() + "：" + multipartFile.getContentType() + "：" + multipartFile.getSize());
+        if ( !multipartFile.isEmpty() ) {
+            System.out.println(multipartFile.getOriginalFilename() + "：" + multipartFile.getContentType() + "：" + multipartFile.getSize());
+        }
         return "redirect:user/list";
     }
 
