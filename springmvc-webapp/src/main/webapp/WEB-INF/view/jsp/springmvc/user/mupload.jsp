@@ -13,7 +13,10 @@
     <div class="row">
         <div class="col-xs-12">
             <spring:form cssClass="form-horizontal" modelAttribute="user" method="post" role="form" enctype="multipart/form-data">
-                <input type="file" name="attFile" id="id-input-file-2" />
+                <input type="file" name="attFile" class="id-input-file-2" />
+                <input type="file" name="attFile" class="id-input-file-2" />
+                <input type="file" name="attFile" class="id-input-file-2" />
+                <input type="file" name="attFile" class="id-input-file-2" />
                 <div class="clearfix form-actions">
                     <div class="col-md-offset-3 col-md-9">
                         <spring:button class="btn btn-info">
@@ -27,7 +30,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+        $('.id-input-file-2').ace_file_input({
             no_file:'No File ...',
             btn_choose:'Choose',
             btn_change:'Change',

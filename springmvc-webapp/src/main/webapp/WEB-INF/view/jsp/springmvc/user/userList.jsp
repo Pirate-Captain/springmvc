@@ -56,7 +56,10 @@
                             <span class="bigger-110">添加</span>
                         </a>
                         <a href="<%=springMvcBaseUrl%>/user/upload" class="btn btn-sm btn-primary">
-                            <span class="bigger-110">添加</span>
+                            <span class="bigger-110">上传</span>
+                        </a>
+                        <a href="<%=springMvcBaseUrl%>/user/mupload" class="btn btn-sm btn-primary">
+                            <span class="bigger-110">多个上传</span>
                         </a>
                     </div>
                 </div>

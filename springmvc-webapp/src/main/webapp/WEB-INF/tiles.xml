@@ -35,4 +35,8 @@
     <definition name="user.upload" extends="baseLayout">
         <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/upload.jsp"/>
     </definition>
+
+    <definition name="user.mupload" extends="baseLayout">
+        <put-attribute name="content" value="/WEB-INF/view/jsp/springmvc/user/mupload.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -11,14 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,11 +92,31 @@ public class UserInfoController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(MultipartFile multipartFile) {
-        if ( !multipartFile.isEmpty() ) {
-            System.out.println(multipartFile.getOriginalFilename() + "：" + multipartFile.getContentType() + "：" + multipartFile.getSize());
+    public String upload(MultipartFile attFile) {
+        if ( null != attFile && !attFile.isEmpty() ) {
+            System.out.println(attFile.getOriginalFilename() + "：" + attFile.getContentType() + "：" + attFile.getSize());
         }
-        return "redirect:user/list";
+        return "redirect:/user/list";
+    }
+
+    @RequestMapping(value = "/mupload", method = RequestMethod.GET)
+    public String multiUpload(Model model) {
+        model.addAttribute("user", new User());
+        return "user.mupload";
+    }
+
+    @RequestMapping(value = "/mupload", method = RequestMethod.POST)
+    public String multiUpload(MultipartFile[] attFile) {
+        for ( MultipartFile multipartFile : attFile ) {
+            if ( multipartFile.isEmpty() ) {
+                continue;
+            }
+            if ( multipartFile.getSize() > 5120000 ) {
+                System.out.println(multipartFile.getOriginalFilename() + " 超过5m！");
+            }
+            System.out.println(multipartFile.getOriginalFilename() + ":" + multipartFile.getContentType() + ":" + multipartFile.getSize());
+        }
+        return "redirect:/user/list";
     }
 
     /**
