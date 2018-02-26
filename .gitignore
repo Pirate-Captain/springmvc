@@ -16,3 +16,5 @@ springmvc/zyl-springmvc.iml
 springmvc-webapp/zyl-springmvc-webapp.iml
 springmvc-webapp/src/main/resources/rebel.xml
 springmvc-webapp/.rebel.xml.bak
+springmvc-package.iws
+springmvc-package.ipr
