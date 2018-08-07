@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <div id="app2">
+        <span v-bind:title="message">鼠标悬停几秒查看此处的动态绑定的提示信息！</span>
+    </div>
+    <div id="app3">
+        <p v-if="seen">You see me!</p>
+    </div>
+    <div id="app4">
+        <ol>
+            <li v-for="production in productions">
+                {{production.id}} {{production.name}} {{production.price}}
+            </li>
+        </ol>
+    </div>
+    <div id="app5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">逆转消息</button>
+    </div>
+    <div id="app6">
+        <p>{{message}}</p>
+        <input v-model="message">
+    </div>
+    <div id="app7">
+        <ol>
+            <todo-item v-for="item in groceryList"
+             v-bind:todo="item"
+             v-bind:key="item.id"></todo-item>
+        </ol>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data : {
+                message : "Hello World from vue!"
+            }
+        });
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                message : "页面加载于" + new Date().toLocaleString()
+            }
+        });
+        var app3 = new Vue({
+            el : "#app3",
+            data : {
+                seen : true
+            }
+        });
+        var app4 = new Vue({
+            el : "#app4",
+            data : {
+                productions : [
+                    {id :"kdfakfjkad", name : "进化论", price : 2000},
+                    {id : "difadi998", name : "计算机", prince : 3000}
+                ]
+            }
+        });
+        var app5 = new Vue({
+            el : "#app5",
+            data : {
+                message : "Hello Vue.js!"
+            },
+            methods : {
+                reverseMessage : function () {
+                    this.message = this.message.split("").reverse().join("")
+                }
+            }
+        });
+        var app6 = new Vue({
+            el : "#app6",
+            data : {
+                message : "If you input the field, you will see the change!"
+            }
+        });
+
+        Vue.component('todo-item', {
+            props : ['todo'],
+            template : '<li>{{ todo.text }}</li>'
+        });
+
+        var app7 = new Vue({
+            el : "#app7",
+            data : {
+                groceryList : [
+                    {id : "kdfkakkkdfadf", text : "apple"},
+                    {id : "8dfdf99df8ad8", text : "banana"}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>
