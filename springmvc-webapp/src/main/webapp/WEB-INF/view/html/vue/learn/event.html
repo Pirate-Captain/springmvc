@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue event</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <button @click="counter += 1">add 1</button>
+        <p>The button above has been clicked {{counter}} times</p>
+    </div>
+
+    <div id="app2">
+        <button @click="warn('form cannot be submited yeat', $event)">submit</button>
+    </div>
+
+    <div id="app3">
+        <!-- 阻止单击事件继续传播 -->
+        <a v-on:click.stop="doThis">doThis<a onclick="alert('ddd')">c</a></a>
+        <!-- 提交事件不再重载页面 -->
+        <form v-on:submit.prevent="onSubmit" action="https://www.baidu.com"><input type="submit" value="submit"></form>
+        <!-- 修饰符可以串联 -->
+        <a v-on:click.stop.prevent="doThat">doThat</a>
+        <!-- 只有修饰符 -->
+        <form v-on:submit.prevent>defaultFormPrevent</form>
+
+        <!-- 添加事件监听器时使用事件捕获模式 -->
+        <!-- 即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理 -->
+        <div v-on:click.capture="doThis"><a @click="doThat">divCaptureA</a></div>
+
+        <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- 即事件不是从内部元素触发的 -->
+        <div v-on:click.self="doThat"><a @click="doThis">divSelfA</a></div>
+
+        <!-- 点击事件将只会触发一次 -->
+        <a v-on:click.once="doThis">click only once</a>
+
+        <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+        <!-- 而不会等待 `onScroll` 完成  -->
+        <!-- 这其中包含 `event.preventDefault()` 的情况 -->
+        <div v-on:scroll.passive="onScroll" style="position:relative; height:30px; overflow:auto">
+            setTimeout( )是设定一个指定等候时间
+            <br>(单位是千分之一秒, millisecond),
+            <br>时间到了, 浏览器就会执行一个指定的
+            <br>method 或 function, 有以下语法:
+            <br>这次例子是设定等待 3 秒 (3000 milliseconds),
+            <br>浏览器就会执行 alert( ) 这一个method，
+            <br>注意这个函数可以由我们自己重新书写。
+            <br>下面就来看一看调用function的方式　
+        </div>
+        <span>Above div scroll times：{{scrollTime}}</span>
+    </div>
+
+    <script>
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                counter: 0
+            }
+        });
+        var app2 = new Vue({
+            el: "#app2",
+            methods: {
+                warn: function (message, event) {
+                    alert(message);
+                    if (event) {
+                        alert(event.target.tagName);
+                        event.preventDefault()
+                    }
+                }
+            }
+        });
+        var app3 = new Vue({
+            el : "#app3",
+            data : {
+                scrollTime : 0
+            },
+            methods : {
+                doThis : function () {
+                    alert("doThis");
+                    return false;
+                },
+                onSubmit : function () {
+                    alert("submit");
+                },
+                doThat : function () {
+                    alert("doThat");
+                },
+                onScroll : function () {
+                    this.scrollTime += 1;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
