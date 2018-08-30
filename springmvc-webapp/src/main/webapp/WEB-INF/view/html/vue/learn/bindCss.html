@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bind Css</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app1" v-bind:class="{active : isActive}">v-bind class</div>
+    <div id="app2" class="class1" v-bind:class="{active : isActive}">v-bind alread exists a class</div>
+    <div id="app3" v-bind:class="classObject">v-bind computed class</div>
+    <div id="app4" v-bind:class="[activeClass, errorClass]">v-bind array class</div>
+    <div id="app5" v-bind:class="[ isActive ? activeClass : '', errorClass]">v-bind array condition class</div>
+    <div id="app6" v-bind:class="[ {active : isActive}, errorClass]">v-bind array condition single class</div>
+    <div id="app7">
+        <my-component class="active"></my-component>
+    </div>
+    <div id="app8">
+        <my-component v-bind:class="[ isActive ? activeClass : '', errorClass]"></my-component>
+    </div>
+    <script>
+        var app1 = new Vue({
+            el : '#app1',
+            data : {
+                isActive : true
+            }
+        })
+        var app2 = new Vue({
+            el : '#app2',
+            data : {
+                isActive : true
+            }
+        })
+        var app3 = new Vue({
+            el : '#app3',
+            data : {
+                isActive : true,
+                hasError : true
+            },
+            computed : {
+                classObject : function () {
+                    return {
+                        'active' : this.isActive, 'text-danger' : this.hasError
+                    }
+                }
+            }
+        })
+        var app4 = new Vue({
+            el : '#app4',
+            data : {
+                activeClass : 'active activeAtt',
+                errorClass : 'error errorAtt'
+            }
+        })
+        var app5 = new Vue({
+            el : '#app5',
+            data : {
+                isActive : true,
+                activeClass : 'active activeAtt',
+                errorClass : 'error errorAtt'
+            }
+        })
+        var app6 = new Vue({
+            el : '#app6',
+            data : {
+                isActive : true,
+                errorClass : 'error errorAtt'
+            }
+        })
+        Vue.component('my-component', {
+            template : '<p class="foo bar">Hi</p>'
+        })
+        var app7 = new Vue({
+            el : '#app7',
+            data : {
+
+            }
+        })
+        var app8 = new Vue({
+            el : '#app8',
+            data : {
+                isActive : true,
+                activeClass : ['active', 'activeAtt'],
+                errorClass : "error errorAtt"
+            }
+        })
+    </script>
+</body>
+</html>

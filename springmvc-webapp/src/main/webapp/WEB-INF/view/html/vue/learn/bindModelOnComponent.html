@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind model on component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1" style="border:1px solid #000">
+        <my-input-text v-model="searchText"></my-input-text>
+        <span>Input : {{searchText}}</span>
+    </div>
+    <div id="app2" style="border:1px solid #000">
+        <my-input-checkbox1 checkboxvalue="a" v-model="checkboxModel"></my-input-checkbox1>
+        <span>checked:{{checkboxModel}}</span>
+    </div>
+    <div id="app3">
+        <my-input-label label="special input" v-on:focus.native="onFocus" v-on:input.native="onInput"></my-input-label>
+    </div>
+    <script>
+        Vue.component('my-input-text', {
+            props : ['inputValue'],
+            template : '<input :value="inputValue" v-on:input="$emit(\'input\', $event.target.value)">'
+        })
+        new Vue({
+            el : '#app1',
+            data : {
+                searchText : ''
+            }
+        })
+        Vue.component('my-input-checkbox1', {
+            props : ['checkboxvalue','inputValue'],
+            model : {
+                prop : 'inputValue',
+                event : 'change'
+            },
+            template : `
+                <div><input type="checkbox"
+                    :value="checkboxvalue"
+                    :checked="inputValue"
+                    @change="$emit('change', $event.target.checked)"
+                >{{checkboxvalue}}</div>
+            `
+        })
+        new Vue({
+            el : '#app2',
+            data : {
+                checkboxModel : false
+            }
+        })
+        Vue.component('my-input-label', {
+            inheritAttrs : false,
+            props : ['label', 'value'],
+            computed : {
+                inputListeners : function () {
+                    var vm = this
+                    return Object.assign({},this.$listeners, {
+                        input : function (event) {
+                            vm.$emit('input', event.target.value)
+                        },
+                        focus : function (event) {
+                            vm.$emit('focus', event.target.event)
+                        }
+                    })
+                }
+            },
+            template : `
+            <label>
+                {{label}}
+                <input
+                    :value="value"
+                    v-bind="$attrs"
+                    v-on="inputListeners"
+                >
+            </label>
+            `
+        })
+        new Vue({
+            el : '#app3',
+            methods : {
+                onInput : function (event) {
+                    console.log(event.data)
+                },
+                onFocus : function (event) {
+                    console.log(event)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

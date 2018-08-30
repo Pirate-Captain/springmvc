@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <button-counter></button-counter>
+    </div>
+    <div id="app2">
+        <blog-post title="hello tomorrow"></blog-post>
+    </div>
+    <div id="app3">
+        <blog-post v-for="(blog, index) in blogs" :key="index" :title="blog.title"></blog-post>
+    </div>
+    <h1>===========================================================</h1>
+    <div id="app4">
+        <blog-post-improvie v-for="(blog, index) in blogs" :key="index" :blog="blog"></blog-post-improvie>
+    </div>
+    <div id="app5" :style="{fontSize : postFontSize  + 'em'}">
+        <blog-post-enlarge v-for="(blog,index) in blogs" :key="index" :blog="blog" @enlarge-text="postFontSize += $event"></blog-post-enlarge>
+    </div>
+    <script>
+        Vue.component('buttonCounter', {
+            data : function () {
+                return {
+                    count : 0
+                }
+            },
+            template : '<button @click="count++">you click me {{count}} times</button>'
+        })
+        Vue.component('blog-post', {
+            props : ['title'],
+            template : '<h3>{{title}}</h3>'
+        })
+        Vue.component('blog-post-improvie', {
+            props : ['blog'],
+            template : '<div class="blog-post">'+
+                  '<h3>{{ blog.title }}</h3>'+
+                  '<div v-html="blog.content"></div>'+
+                '</div>'
+        })
+        new Vue({
+            el : '#app1'
+        })
+        new Vue({
+            el : '#app2'
+        })
+        var blogItems = []
+        for ( var i=0 ;i < 10; i++) {
+            var id = random(0, 100);
+            blogItems.push({'id': id, 'title' : 'Hello World' +id })
+        }
+        new Vue({
+            el : '#app3',
+            data : {
+                blogs : blogItems
+            }
+        })
+
+        for ( var i=0 ;i < 10; i++) {
+            var id = random(0, 100);
+            blogItems.push({'id': id, 'title' : 'Hello World' +id, 'content':'this is content' +id })
+        }
+
+        new Vue({
+            el : '#app4',
+            data : {
+                blogs : blogItems
+            }
+        })
+
+        Vue.component('blog-post-enlarge', {
+            props : ['blog'],
+            template : '<div class="blog-post">'+
+                '<h3>{{ blog.title }}</h3>'+
+                '<button @click="$emit(\'enlarge-text\', 0.1)">enlarge</button>'+
+                '<div v-html="blog.content"></div>'+
+                '</div>'
+        })
+
+        new Vue({
+            el : '#app5',
+            data : {
+                postFontSize : 1,
+                blogs : blogItems
+            }
+        })
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min
+        }
+    </script>
+</body>
+</html>

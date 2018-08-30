@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>if condition</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1" v-if="showMessage">You lazy programmer!</div>
+    <div id="app2">
+        <p v-if="showMessage">You lazy programmer！</p>
+        <p v-else>You glory programmer！</p>
+    </div>
+    <div id="app3" style="border:1px solid #000">
+        <template v-if="showMessage">
+            <h1>Hi gays!</h1>
+            <p>You can see me？</p>
+            <p>You lazy programmer！</p>
+        </template>
+    </div>
+    <div id="app4" style="border:1px solid #000">
+        <div v-if="showType == 1">
+            <p>Ha Ha，first is Show！</p>
+        </div>
+        <div v-else-if="2 == showType">
+            <p>Ya, secode is show！</p>
+        </div>
+        <div v-else>
+            <p>En, else is show！</p>
+        </div>
+    </div>
+    <div id="app5">
+        <template v-if="logintype == 'mobilephone'">
+            <label>MobilePhone：</label>
+            <input placeholder="Enter your mobilephone">
+        </template>
+        <template v-else>
+            <label>Emaile：</label>
+            <input placeholder="Enter your email">
+        </template>
+        <button @click="troggleButton">切换登录方式</button>
+    </div>
+    <div id="app6">
+        <template v-if="logintype === 'mobilephone'">
+            <label>MobilePhone：</label>
+            <input placeholder="Enter your mobilephone" key="mobile-input">
+        </template>
+        <template v-else>
+            <label>Emaile：</label>
+            <input placeholder="Enter your email" key="email-input">
+        </template>
+        <button @click="troggleButtonNew">切换登录方式</button>
+    </div>
+    <div id="app7">
+        <p v-show="showMessage">hello gays！I am v-show</p>
+    </div>
+    <script>
+        var app1 = new Vue({
+            el : '#app1',
+            data : {
+                showMessage : true
+            }
+        })
+        var app2 = new Vue({
+            el : '#app2',
+            data : {
+                showMessage : false
+            }
+        })
+        var app3 = new Vue({
+            el : '#app3',
+            data : {
+                showMessage : true
+            }
+        })
+        var app4 = new Vue({
+            el : '#app4',
+            data : {
+                showType : 1
+            }
+        })
+        var app5 = new Vue({
+            el : '#app5',
+            data : {
+                logintype : 'mobilephone'
+            },
+            methods : {
+                troggleButton : function () {
+                    if ( 'mobilephone' === this.logintype ) {
+                        return this.logintype = 'email'
+                    } else {
+                        return this.logintype = 'mobilephone'
+                    }
+                }
+            }
+        })
+        var app6 = new Vue({
+            el : '#app6',
+            data : {
+                logintype : 'mobilephone'
+            },
+            methods : {
+                troggleButtonNew : function () {
+                    return this.logintype = this.logintype === 'mobilephone' ? 'email' : 'mobilephone'
+                }
+            }
+        })
+        var app7 = new Vue({
+            el : '#app7',
+            data : {
+                showMessage : true
+            }
+        })
+    </script>
+</body>
+</html>

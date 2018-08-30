@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is : {{message}}</p>
+    </div>
+    <div id="app2">
+        <input type="checkbox" id="checkbox1" v-model="checked">
+        <label for="checkbox1">{{checked}}</label>
+    </div>
+    <div id="app3">
+        <input id="jack" type="checkbox" value="jack" v-model="checkmessage">
+        <label for="jack">jack</label>
+        <input id="john" type="checkbox" value="john" v-model="checkmessage">
+        <label for="john">john</label>
+        <input id="sara" type="checkbox" value="sara" v-model="checkmessage">
+        <label for="sara">sara</label>
+        <span>CheckedName : {{checkmessage}}</span>
+    </div>
+    <div id="app4">
+        <input type="radio" id="one" value="one" v-model="picked">
+        <label for="one">one</label>
+        <input type="radio" id="two" value="two" v-model="picked">
+        <label for="two">two</label>
+        <span>Picked : {{picked}}</span>
+    </div>
+    <div id="app5">
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option value="M">A</option>
+            <option value="N">B</option>
+            <option VALUE="O">C</option>
+        </select>
+        <span>Selected ： {{selected}}</span>
+    </div>
+    <div id="app6">
+        <select v-model="selected">
+            <option v-for="opt in options" :value="opt.key">{{opt.value}}</option>
+        </select>
+        <span>selected:{{selected}}</span>
+    </div>
+    <div id="app7">
+        <input v-model.lazy="msg">
+        <span>input : {{msg}}</span>
+    </div>
+    <div id="app8">
+        <input v-model.number="age" type="number">
+    </div>
+    <div id="app9">
+        <input v-model.trim="msg">
+        <span>Input : {{msg}}</span>
+    </div>
+    <script>
+        var app1 = new Vue({
+            el : '#app1',
+            data : {
+                message : ''
+            }
+        })
+        var app2 = new Vue({
+            el : '#app2',
+            data : {
+                checked : false
+            }
+        })
+        var app3 = new Vue({
+            el : '#app3',
+            data : {
+                checkmessage : []
+            }
+        })
+        var app4 = new Vue({
+            el : '#app4',
+            data : {
+                picked : []
+            }
+        })
+        var app5 = new Vue({
+            el : '#app5',
+            data : {
+                selected : ''
+            }
+        })
+        var app6 = new Vue({
+            el : '#app6',
+            data : {
+                selected : '',
+                options : [
+                    {'key' : '', 'value' : '请选择'},
+                    {'key' : '12321321', 'value' : 'A'},
+                    {'key' : '34324134', 'value' : 'B'}
+                ]
+            }
+        })
+        var app7 = new Vue({
+            el : '#app7',
+            data : {
+                msg : ''
+            }
+        })
+        var app8 = new Vue({
+            el : '#app8',
+            data : {
+                age : 0
+            }
+        })
+        var app9 = new Vue({
+            el : '#app9',
+            data : {
+                msg : ''
+            }
+        })
+    </script>
+</body>
+</html>

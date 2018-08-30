@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bind style</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1" v-bind:style="{color : activeColor, fontSize : fontSize + 'px'}">bind style direct</div>
+    <div id="app2" v-bind:style="styleObject">bind style object</div>
+    <div id="app3" v-bind:style="styleObject">bind style object compute</div>
+    <div id="app4" v-bind:style="[colorStyles, fontStyles]">bind stye array</div>
+    <div id="app5" :style="{display : ['-webkit-box', '-ms-flexbox', 'flex']}">bind style multi attribute</div>
+    <script>
+        var app1 = new Vue({
+            el : '#app1',
+            data : {
+                activeColor : 'red',
+                fontSize : 30
+            }
+        })
+        var app2 = new Vue({
+            el : '#app2',
+            data : {
+                styleObject : {
+                    color : 'red',
+                    fontSize : '30px'
+                }
+            }
+        })
+        var app3 = new Vue({
+            el : '#app3',
+            data : {
+                activeColor : 'red',
+                fontSize : 20
+            },
+            computed : {
+                styleObject : function () {
+                    return {
+                        color : this.activeColor, 'fontSize':this.fontSize + 'px'
+                    }
+                }
+            }
+        })
+        var app4 = new Vue({
+            el : '#app4',
+            data : {
+                colorStyles : {
+                    'color' : 'red'
+                },
+                fontStyles : {
+                    'font-size' : '30px',
+                    'font-family' : '微软雅黑'
+                }
+            }
+        })
+        var app5 = new Vue({
+            el : '#app5',
+            data : {
+
+            }
+        })
+    </script>
+</body>
+</html>
