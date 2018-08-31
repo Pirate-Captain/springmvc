@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>render</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <render-first :level="level">this is h{{level}}</render-first>
+    </div>
+    <script>
+        Vue.component('render-first', {
+            render : function (createElement) {
+                if ( this.level > 0 && this.level < 5 ) {
+                    return createElement('h' + this.level, this.$slots.default);
+                }
+            },
+            props : {
+                level : {
+                    type : Number,
+                    required : true
+                }
+            }
+        })
+        var app1 = new Vue({
+            el : '#app1',
+            data : {
+                level: 1
+            }
+        })
+    </script>
+</body>
+</html>

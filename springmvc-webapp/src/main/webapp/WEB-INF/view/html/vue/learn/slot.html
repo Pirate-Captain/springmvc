@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <slot-template-1 title="slot-template-1"><span>Yea!,I am the span slot</span>, I am the out span slot</slot-template-1>
+    </div>
+    <div id="app2">
+        <slot-template-2 title="slot-template-2">I am the slot 2, Can you see me?</slot-template-2>
+    </div>
+    <div id="app3">
+        <slot-template-3>
+            <template slot="header"><h1>I am the header3</h1></template>
+            <p>I am the body3</p>
+            <template slot="footer"><h1>I am the footer3</h1></template>
+            <p>I am the body under footer3</p>
+        </slot-template-3>
+    </div>
+    <div id="app4">
+        <slot-template-3>
+            <h1 slot="header">I am the header4</h1>
+            <p>I am the body 4</p>
+            <h1 slot="footer">I am the footer4</h1>
+            <p>I am the body under footer3</p>
+            <h1 slot="footer">I am the footer 4 another</h1>
+        </slot-template-3>
+    </div>
+    <div id="app5">
+        <slot-template-4>
+            提交
+        </slot-template-4>
+    </div>
+    <div id="app6">
+        <slot-template-5 v-bind:todos="todos">
+            <template slot-scope="slotProps">
+                <span v-if="slotProps.todo.isComplete">√</span>
+                <span v-else>×</span>
+                {{slotProps.todo.text}}
+            </template>
+        </slot-template-5>
+        <p>=========================================</p>
+        <slot-template-5 v-bind:todos="todos">
+            <template slot-scope="{todo}">
+                <span v-if="todo.isComplete">√</span>
+                <span v-else>×</span>
+                {{todo.text}}
+            </template>
+        </slot-template-5>
+    </div>
+    <script>
+        Vue.component('slot-template-1', {
+            props : ['title'],
+            template : '<span><a>{{title}}</a> <slot></slot></span>'
+        })
+        new Vue({
+            el : '#app1'
+        })
+        Vue.component('slot-template-2', {
+            props: ['title'],
+            template : '<span>{{title}}</span>'
+        })
+        new Vue({
+            el : '#app2'
+        })
+        Vue.component('slot-template-3', {
+            template : `
+                <div>
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <main>
+                        <slot></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `
+        })
+        new Vue({
+            el : '#app3'
+        })
+        new Vue({
+            el : '#app4'
+        })
+        Vue.component('slot-template-4', {
+            template : '<button type="submit"><slot>submit</slot></button>'
+        })
+        new Vue({
+            el : '#app5'
+        })
+        Vue.component('slot-template-5', {
+            props : ['todos'],
+            data : function () {
+                return {
+                    todolists : this.todos
+                }
+            },
+            template : `
+                <ul>
+                    <li v-for="(todo, index) in todolists" :key="index">
+                        <slot v-bind:todo="todo">
+                            {{todo.text}}
+                        </slot>
+                    </li>
+                </ul>
+            `
+        })
+
+        new Vue({
+            el : '#app6',
+            data : {
+                todos : [
+                    {'id' : '8748341341', 'isComplete' : false, 'text' : '喂猫'},
+                    {'id' : '9265362563', 'isComplete' : true,  'text' : '浇花'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
